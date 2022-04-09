@@ -1,4 +1,7 @@
 module.exports = ({
+  env: {
+    localhost: process.env?.LOCALHOST === "true"
+  },
   pageExtensions: ["tsx"],
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(

@@ -11,10 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
     const router = useRouter();
 
     useEffect(() => {
-
-      if(!process.env.LOCALHOST) {
-
-        console.log('live');
+      console.log(process.env.localhost);
+      
+      if(!process.env.localhost) {
   
         const adminRedirects = [
           '/#confirmation_token', 
