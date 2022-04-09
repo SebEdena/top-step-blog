@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "export": "next build && next export -o ./dist",
-    "test": "jest"
+    "test": "jest",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.8.0",
@@ -31,6 +33,9 @@
     "@types/js-yaml": "^4.0.0",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.2",
+    "eslint": "8.13.0",
+    "eslint-config-next": "12.1.4",
+    "eslint-config-prettier": "^8.5.0",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.4",
     "typescript": "^4.6.3",
