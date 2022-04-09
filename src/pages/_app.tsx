@@ -12,9 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
     useEffect(() => {
 
-      if(process.env.LOCALHOST) {
+      if(!process.env.LOCALHOST) {
 
-        console.log('local');
+        console.log('live');
   
         const adminRedirects = [
           '/#confirmation_token', 
