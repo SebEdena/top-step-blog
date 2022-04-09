@@ -7,8 +7,8 @@ import fs from "fs";
 import yaml from "js-yaml";
 import { parseISO } from 'date-fns';
 import PostLayout from "../../components/PostLayout";
+import remarkGFM from "remark-gfm"
 
-import InstagramEmbed from "react-instagram-embed";
 import YouTube from "react-youtube";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 
@@ -24,7 +24,7 @@ export type Props = {
   source: MDXRemoteSerializeResult;
 };
 
-const components = { InstagramEmbed, YouTube, TwitterTweetEmbed };
+const components = { YouTube, TwitterTweetEmbed };
 const slugToPostContent = (postContents => {
   let hash = {}
   postContents.forEach(it => hash[it.slug] = it)
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
   });
 
-  const source = await serialize(content);
+  const source = await serialize(content, {mdxOptions: { remarkPlugins: [remarkGFM]}});
 
   return {
     props: { 
