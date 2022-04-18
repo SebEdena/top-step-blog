@@ -1,113 +1,246 @@
-![Next.js blogging template for Netlify](https://repository-images.githubusercontent.com/284910441/d8efc300-e2ae-11ea-9596-b01e3844e39d)
+# A statically generated blog example using Next.js and Contentful
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c6f44d34-0570-4ca0-9d3d-cabdaa2b3afb/deploy-status)](https://app.netlify.com/sites/nextjs-netlify-blog-template/deploys)
-[![MADE BY Next.js](https://img.shields.io/badge/MADE%20BY%20Next.js-000000.svg?style=flat&logo=Next.js&labelColor=000)](https://nextjs.org/)
-
-Next.js blogging template for Netlify is a boilerplate for building blogs with only Netlify stacks.
-
-There are some boilerplate or tutorials for the combination of Next.js and Netlify on GitHub. These resources have documentation and good tutorial to get started Next.js and Netlify quickly, but they are too simple to build blogs with standard features like tagging.
-
-Next.js blogging template for Netlify has already implemented these standard features for building blogs with only using Next.js and Netlify stacks.
+This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using [Contentful](https://www.contentful.com/) as the data source.
 
 ## Demo
 
-Deploy on your environment by clicking here:
+### [https://next-blog-contentful.vercel.app/](https://next-blog-contentful.vercel.app/)
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/wutali/nextjs-netlify-blog-template&stack=cms)
+## Deploy your own
 
-Or access the following demo site:
+Using the Deploy Button below, you'll deploy the Next.js project as well as connect it to your Contentful space using the Vercel Contentful Integration.
 
-[Next.js blog template for Netlify](https://nextjs-netlify-blog-template.netlify.app/)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fcms-contentful&project-name=nextjs-contentful-blog&repository-name=nextjs-contentful-blog&demo-title=Next.js+Blog&demo-description=Static+blog+with+multiple+authors+using+Preview+Mode&demo-url=https%3A%2F%2Fnext-blog-contentful.vercel.app%2F&demo-image=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fv1625705016%2Ffront%2Fexamples%2FCleanShot_2021-07-07_at_19.43.15_2x.png&integration-ids=oac_aZtAZpDfT1lX3zrnWy7KT9VA&env=CONTENTFUL_PREVIEW_SECRET&envDescription=Any%20URL%20friendly%20value%20to%20secure%20Preview%20Mode)
 
-## Features
+### Related examples
 
-- **Tagging**: organizes content by tags
-- **Author**: displays author names who write a post
-- **Pagination**: limits the number of posts per page
-- **CMS**: built with CMS to allow editors modifying content with the quickest way
-- **SEO optimized**: built-in metadata like JSON-LD
-- **Shortcode**: extends content writing with React component like WordPress shortcodes
+- [WordPress](/examples/cms-wordpress)
+- [DatoCMS](/examples/cms-datocms)
+- [Sanity](/examples/cms-sanity)
+- [TakeShape](/examples/cms-takeshape)
+- [Prismic](/examples/cms-prismic)
+- [Strapi](/examples/cms-strapi)
+- [Agility CMS](/examples/cms-agilitycms)
+- [Cosmic](/examples/cms-cosmic)
+- [ButterCMS](/examples/cms-buttercms)
+- [Storyblok](/examples/cms-storyblok)
+- [GraphCMS](/examples/cms-graphcms)
+- [Kontent](/examples/cms-kontent)
+- [Ghost](/examples/cms-ghost)
+- [Umbraco Heartcore](/examples/cms-umbraco-heartcore)
+- [Blog Starter](/examples/blog-starter)
+- [Builder.io](/examples/cms-builder-io)
 
-## Dependencies
+## How to use
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [Next.js](https://nextjs.org/)
-- [Netlify](https://www.netlify.com/)
-- [MDX](https://mdxjs.com/)
+Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
 
-## Getting started
-
-To create your blog using the template, open your terminal, `cd` into the directory you'd like to create the app in,
-and run the following command:
-
-```
-npx create-next-app your-blog --example "https://github.com/wutali/nextjs-netlify-blog-template"
-```
-
-After that, set up your project as following the Netlify blog:
-
-[A Step-by-Step Guide: Deploying on Netlify](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/)
-
-## Customization
-
-This template is just a template and a boilerplate in which users can customize anything after the project was cloned and started.
-The following instructions introduce common customization points like adding new metadata or applying a new design theme.
-
-### Styling pages by a customized theme
-
-All source codes related to the blog are under [components](/src/components) and [pages](/src/pages) directory.
-You can modify it freely if you want to apply your design theme.
-All components use [styled-jsx](https://github.com/vercel/styled-jsx) and [css-modules](https://github.com/css-modules/css-modules) to define their styles, but you can choose any styling libraries for designing your theme.
-
-The directory tree containing the blog source code are described below:
-
-```
-meta: yaml files defining metadata like authors or tags
-public: images, favicons and other static assets
-src
-├── assets: other assets using inside of components
-├── components: pieces of components consisting of pages
-├── content: mdx files for each post page
-├── lib: project libraries like data fetching or pagination
-└── pages: page components managing by Next.js
+```bash
+npx create-next-app --example cms-contentful cms-contentful-app
+# or
+yarn create next-app --example cms-contentful cms-contentful-app
+# or
+pnpm create next-app -- --example cms-contentful cms-contentful-app
 ```
 
-### Organizing content by categories
+## Configuration
 
-The category metadata that associates with content have the same relationship with the authors' one.
-Then reference these implementations for adding new metadata:
+### Step 1. Create an account and a space on Contentful
 
-- [public/admin/config.yml](/public/admin/config.yml#L51): author metadata definition for Netlify CMS
-- [src/lib/authors.tsx](/src/lib/authors.ts): fetches metadata and defines utility functions for components
-- [meta/authors.yml](/src/meta/authors.yml): author content managed by Netlify CMS
-- [src/components/PostLayout.tsx](/src/components/PostLayout.tsx): displays author content for each page
+First, [create an account on Contentful](https://www.contentful.com/sign-up/).
 
-You understood they have four steps to add the category metadata on your project after you read the above source codes:
+After creating an account, create a new empty **space** from the [dashboard](https://app.contentful.com/) and assign to it any name of your liking.
 
-1. Define the category metadata on the above Netlify config file
-2. Create an empty file named with `categories.yml` under [meta](/src/meta/) directory
-3. Create a new module for fetching category metadata
-4. Display the category metadata on [src/components/PostLayout.tsx](/src/components/PostLayout.tsx#L75) or other components you want
+### Step 2. Create a content model
 
-It is all you have to do. After that, you can access Netlify CMS and create new categories at any time.
+The [content model](https://www.contentful.com/developers/docs/concepts/data-model/) defines the data structures of your application/websites. The structures are flexible and you can tailor them to your needs.
 
-### Locale settings for Netlify CMS
+For this example you need to create a content model that defines an author and a post content type. **You can create these two by running a script or by doing it manually** to familiarize yourself with the Contentful user interface.
 
-Modify [config.yml](/public/admin/config.yml) and
-[index.html](/public/admin/index.html) under [public/admin](/public/admin/) directory
-as following instructions:
+#### Run a script to create the content model
 
-[Netlify CMS - Configuration Options #Locale](https://www.netlifycms.org/docs/configuration-options/#locale)
+This project includes a setup script which you can use to set up the content model expected by the source code.
 
-## References
+In your Contentful dashboard go to **Settings > General Settings** and copy the **Space ID**.
 
-- [Netlify CMS Documentation](https://www.netlifycms.org/docs/intro/)
-- [Building a Markdown blog with Next 9.4 and Netlify](https://www.netlify.com/blog/2020/05/04/building-a-markdown-blog-with-next-9.4-and-netlify/)
-- [Hugo Theme - Codex](https://github.com/jakewies/hugo-theme-codex)
-- [Next.js Starter Template for TypeScript](https://github.com/vercel/next-learn-starter/tree/master/typescript-final)
-- [Building Blog with NextJS and Netlify CMS](https://dev.to/mefaba/building-blog-with-nextjs-and-netlify-cms-fom)
-- [Unicons](https://github.com/Iconscout/unicons)
+Next, go to **Settings > API > Content management tokens** and create a new token by clicking **Generate personal token**. This token has the same access rights as the logged in user. **Do not share it publicly**, you will only use it to set up your space and can delete it afterwards.
 
-## License
+With the space ID and management access token at hand run the following command:
 
-MIT
+```
+npx cross-env CONTENTFUL_SPACE_ID=YOUR_SPACE_ID CONTENTFUL_MANAGEMENT_TOKEN=XXX npm run setup
+```
+
+This command will create the needed content structures and set up your Contentful space ready to use. The output should look as follows:
+
+```
+> cms-contentful@1.0.0 setup /Users/stefan.judis/Projects/next.js/examples/cms-contentful
+> node ./contentful/setup.js $CONTENTFUL_SPACE_ID $CONTENTFUL_MANAGEMENT_TOKEN
+
+┌──────────────────────────────────────────────────┐
+│ The following entities are going to be imported: │
+├─────────────────────────────────┬────────────────┤
+│ Content Types                   │ 2              │
+├─────────────────────────────────┼────────────────┤
+│ Editor Interfaces               │ 2              │
+├─────────────────────────────────┼────────────────┤
+│ Locales                         │ 1              │
+├─────────────────────────────────┼────────────────┤
+│ Webhooks                        │ 0              │
+├─────────────────────────────────┼────────────────┤
+│ Entries                         │ 0              │
+├─────────────────────────────────┼────────────────┤
+│ Assets                          │ 0              │
+└─────────────────────────────────┴────────────────┘
+ ✔ Validating content-file
+ ✔ Initialize client (1s)
+ ✔ Checking if destination space already has any content and retrieving it (2s)
+ ✔ Apply transformations to source data (1s)
+ ✔ Push content to destination space
+   ✔ Connecting to space (1s)
+   ...
+   ...
+   ...
+```
+
+#### Create the content model manually
+
+##### Create an `Author` content type
+
+From your contentful space, go to **Content model** and add a new content type:
+
+- Give it the **Name** `Author`, the **Api Identifier** should be `author`
+
+Once the content model is saved, add these fields (you don't have to modify the settings unless specified):
+
+- `name` - **Text** field (type **short text**). **Field ID** should be set to `name`
+- `picture` - **Media** field (type **one file**). **Field ID** should be set to `picture`
+
+Save the content type and continue.
+
+##### Create a `post` type
+
+From your contentful space, go to **Content model** and add another content type:
+
+- Give it the **Name** `Post`, the **Api Identifier** should be `post`
+
+Next, add these fields (you don't have to modify the settings unless specified):
+
+- `title` - **Text** field (type **short text**)
+- `content` - **Rich text** field
+- `excerpt` - **Text** field (type **Long text, full-text search**)
+- `coverImage` - **Media** field (type **one file**)
+- `date` - **Date and time** field
+- `slug` - **Text** field. You can optionally go to the settings of this field, and under **Appearance**, select **Slug** to display it as a slug of the `title` field.
+- `author` - **Reference** field (type **one reference**)
+
+Save the content type and continue.
+
+### Step 3. Validate your content model
+
+After setting up the content model (either manually or by running `npm run setup` or `yarn setup`), it should look as follows.
+
+**Content model overview**
+
+![Content model overview](./docs/content-model-overview.png)
+
+### Step 4. Populate Content
+
+Go to the **Content** section in your space, then click on **Add entry** and select the **Author** content type:
+
+- You just need **1 author entry**.
+- Use dummy data for the text.
+- For the image, you can download one from [Unsplash](https://unsplash.com/).
+
+Next, create another entry with the content type **Post**:
+
+- We recommend creating at least **2 post entries**.
+- Use dummy data for the text.
+- For images, you can download them from [Unsplash](https://unsplash.com/).
+- Pick the **author** you created earlier.
+
+**Important:** For each entry and asset, you need to click on **Publish**. If not, the entry will be in draft state.
+
+![Published content entry](./docs/content-entry-publish.png)
+
+### Step 5. Set up environment variables
+
+From your contentful space, go to **Settings > API keys**. There will be an example Content delivery / preview token - you can use these API keys. (You may also create a new key.)
+
+Next, copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
+
+```bash
+cp .env.local.example .env.local
+```
+
+Then set each variable on `.env.local`:
+
+- `CONTENTFUL_SPACE_ID` should be the **Space ID** field of your API Key
+- `CONTENTFUL_ACCESS_TOKEN` should be the **[Content Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/) - access token** field of your API key
+- `CONTENTFUL_PREVIEW_ACCESS_TOKEN` should be the **[Content Preview API](https://www.contentful.com/developers/docs/references/content-preview-api/) - access token** field of your API key
+- `CONTENTFUL_PREVIEW_SECRET` should be any value you want. It must be URL friendly as the dashboard will send it as a query parameter to enable preview mode
+
+Your `.env.local` file should look like this:
+
+```bash
+CONTENTFUL_SPACE_ID=...
+CONTENTFUL_ACCESS_TOKEN=...
+CONTENTFUL_PREVIEW_ACCESS_TOKEN=...
+CONTENTFUL_PREVIEW_SECRET=...
+```
+
+### Step 6. Run Next.js in development mode
+
+```bash
+npm install
+npm run dev
+
+# or
+
+yarn install
+yarn dev
+```
+
+Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+
+### Step 7. Try preview mode
+
+In your Contentful space, go to **Settings > Content preview** and add a new content preview for development.
+
+The **Name** field may be anything, like `Development`. Then, under **Content preview URLs**, check **Post** and set its value to:
+
+```
+http://localhost:3000/api/preview?secret=<CONTENTFUL_PREVIEW_SECRET>&slug={entry.fields.slug}
+```
+
+Replace `<CONTENTFUL_PREVIEW_SECRET>` with its respective value in `.env.local`.
+
+![Content preview setup](./docs/content-preview-setup.png)
+
+Once saved, go to one of the posts you've created and:
+
+- **Update the title**. For example, you can add `[Draft]` in front of the title.
+- The state of the post will switch to **CHANGED** automatically. **Do not** publish it. By doing this, the post will be in draft state.
+- In the sidebar, you will see the **Open preview** button. Click on it!
+
+![Content entry overview](./docs/content-entry-preview.png)
+
+You will now be able to see the updated title. To exit preview mode, you can click on **Click here to exit preview mode** at the top of the page.
+
+### Step 8. Deploy on Vercel
+
+You can deploy this app to the cloud with [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+#### Deploy Your Local Project
+
+To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [import to Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example).
+
+**Important**: When you import your project on Vercel, make sure to click on **Environment Variables** and set them to match your `.env.local` file.
+
+#### Deploy from Our Template
+
+Alternatively, you can deploy using our template by clicking on the Deploy button below.
+
+This will deploy the Next.js project as well as connect it to your Contentful space using the Vercel Contentful Integration. If you are using Preview Mode, make sure to add `CONTENTFUL_PREVIEW_SECRET` as an [Environment Variable](https://vercel.com/docs/environment-variables) as well.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fcms-contentful&project-name=nextjs-contentful-blog&repository-name=nextjs-contentful-blog&demo-title=Next.js+Blog&demo-description=Static+blog+with+multiple+authors+using+Preview+Mode&demo-url=https%3A%2F%2Fnext-blog-contentful.vercel.app%2F&demo-image=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Fv1625705016%2Ffront%2Fexamples%2FCleanShot_2021-07-07_at_19.43.15_2x.png&integration-ids=oac_aZtAZpDfT1lX3zrnWy7KT9VA&env=CONTENTFUL_PREVIEW_SECRET&envDescription=Any%20URL%20friendly%20value%20to%20secure%20Preview%20Mode)
