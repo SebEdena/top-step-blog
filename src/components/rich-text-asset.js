@@ -1,5 +1,5 @@
 import ContentfulImage from './contentful-image'
-import markdownStyles from './markdown-styles.module.css'
+import markdownStyles from '../styles/markdown-styles.module.css'
 
 export default function RichTextAsset({ id, assets }) {
   const asset = assets?.find((asset) => asset.sys.id === id)

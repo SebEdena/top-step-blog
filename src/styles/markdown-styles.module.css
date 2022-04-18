@@ -17,7 +17,7 @@
   @apply text-2xl mt-8 mb-4 leading-snug;
 }
   
-.rich-text-image span {
+.rich-text-image, .rich-text-image span {
   position: relative !important;
 }
 

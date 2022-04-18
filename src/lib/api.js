@@ -51,7 +51,6 @@ function extractPost(fetchResponse) {
 }
 
 function extractPostEntries(fetchResponse) {
-  console.log(fetchResponse);
   return fetchResponse?.data?.postCollection?.items
 }
 
