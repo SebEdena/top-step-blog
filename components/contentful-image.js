@@ -6,9 +6,7 @@ const contentfulLoader = ({ src, width, quality }) => {
 
 const ContentfulImage = (props) => {
   return (
-    <div className="block">
-      <Image loader={contentfulLoader} {...props} />
-    </div>
+    <Image loader={contentfulLoader} {...props} />
   )
 }
 

@@ -16,3 +16,12 @@
 .markdown h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
 }
+  
+.rich-text-image span {
+  position: relative !important;
+}
+
+.rich-text-image img {
+  position: relative !important;
+  height: auto !important;
+}
