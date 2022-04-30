@@ -21,7 +21,7 @@ const customMarkdownOptions = (content) => ({
           case "SocialMedia": {
             switch(embed.origin) {
               case "twitter": return <Twitter link={embed.link} />;
-              case "youtube": return <Youtube />;
+              case "youtube": return <Youtube link={embed.link} />;
               default: return null;
             }
           }
