@@ -2,6 +2,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 import markdownStyles from '../styles/markdown-styles.module.css'
 import RichTextAsset from './rich-text-asset'
+import Youtube from './social-media/youtube'
+import Twitter from './social-media/twitter'
 
 const customMarkdownOptions = (content) => ({
   renderNode: {
@@ -11,6 +13,24 @@ const customMarkdownOptions = (content) => ({
         assets={content.links.assets.block}
       />
     ),
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+      const embedId = node.data.target.sys.id;
+      const embed = content.links.entries.block.find(entry => entry.sys.id === embedId)
+      if(embed) {
+        switch(embed.__typename) {
+          case "SocialMedia": {
+            switch(embed.origin) {
+              case "twitter": return <Twitter link={embed.link} />;
+              case "youtube": return <Youtube />;
+              default: return null;
+            }
+          }
+        }
+        return null;
+      } else {
+        return null;
+      }
+    }
   },
 })
 

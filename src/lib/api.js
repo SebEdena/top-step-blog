@@ -20,8 +20,21 @@ content {
         sys {
           id
         }
+        __typename
         url
         description
+      }
+    }
+    entries {
+      block {
+        sys {
+          id
+        }
+        __typename
+        ... on SocialMedia {
+          link
+          origin
+        }
       }
     }
   }
@@ -44,6 +57,7 @@ async function fetchGraphQL(query, preview = false) {
       body: JSON.stringify({ query }),
     }
   ).then((response) => response.json())
+    .catch((err) => console.log(err))
 }
 
 function extractPost(fetchResponse) {
