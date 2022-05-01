@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         await Promise.all(
             posts.map(post => res.unstable_revalidate(`/posts/${post.slug}`))
         )
-        await res.unstable_revalidate(`/`)
+        await res.unstable_revalidate(``)
         return res.json({ revalidated: true })
     } catch (err) {
         // If there was an error, Next.js will continue
