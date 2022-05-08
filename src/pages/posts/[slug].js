@@ -10,6 +10,7 @@ import SectionSeparator from '../../components/section-separator'
 import Layout from '../../components/layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
+import PageMeta from '../../components/meta/page-meta'
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter()
@@ -19,36 +20,40 @@ export default function Post({ post, morePosts, preview }) {
   }
 
   return (
-    <Layout preview={preview}>
-      <Container>
-        <Header />
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article>
-              <Head>
-                <title>
-                  {post.title} | Next.js Blog Example
-                </title>
-                <meta property="og:image" content={post.coverImage.url} />
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
-              <PostBody content={post.content} />
-            </article>
-            <SectionSeparator />
-            {morePosts && morePosts.length > 0 && (
-              <MoreStories posts={morePosts} />
-            )}
-          </>
-        )}
-      </Container>
-    </Layout>
+    <>
+      <PageMeta 
+        post
+        url={`/posts/${post.slug}`}
+        title={post.title}
+        description={post.description}
+        author={post.author.name}
+        date={post.date}
+        image={post.coverImage.url}
+      />
+      <Layout preview={preview}>
+        <Container>
+          {router.isFallback ? (
+            <PostTitle>Loading…</PostTitle>
+          ) : (
+            <>
+              <article>
+                <PostHeader
+                  title={post.title}
+                  coverImage={post.coverImage}
+                  date={post.date}
+                  author={post.author}
+                />
+                <PostBody content={post.content} />
+              </article>
+              <SectionSeparator />
+              {morePosts && morePosts.length > 0 && (
+                <MoreStories posts={morePosts} />
+              )}
+            </>
+          )}
+        </Container>
+      </Layout>
+    </>
   )
 }
 

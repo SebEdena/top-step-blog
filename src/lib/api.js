@@ -68,6 +68,18 @@ function extractPostEntries(fetchResponse) {
   return fetchResponse?.data?.postCollection?.items
 }
 
+function extractCategories(fetchResponse) {
+  return fetchResponse?.data?.tagCollection?.items
+}
+
+function extractCategory(fetchResponse) {
+  return fetchResponse?.data?.tagCollection?.items?.[0]
+}
+
+function extractPostsFromCategoryEntries(fetchResponse) {
+  return fetchResponse?.data?.tagCollection?.items?.[0]?.linkedFrom?.postCollection?.items
+}
+
 export async function getPreviewPostBySlug(slug) {
   const entry = await fetchGraphQL(
     `query {
@@ -138,4 +150,58 @@ export async function getPostAndMorePosts(slug, preview) {
     post: extractPost(entry),
     morePosts: extractPostEntries(entries),
   }
+}
+
+export async function getAllPostsFromCategory(category, preview) {
+
+  const entries = await fetchGraphQL(
+    `query {
+      tagCollection(where: { slug: "${category}" }, limit: 1) {
+        items {
+          linkedFrom {
+            postCollection(preview: ${preview ? 'true' : 'false'}) {
+              items {
+                ${POST_GRAPHQL_FIELDS}
+              }
+            }
+          }
+        }
+      }
+    }`,
+    preview
+  )
+
+  return extractPostsFromCategoryEntries(entries);
+}
+
+export async function getCategories() {
+  const entries = await fetchGraphQL(
+    `query {
+      tagCollection {
+        items {
+          slug
+          name
+        }
+      }
+    }`
+  )
+
+  return extractCategories(entries);
+}
+
+export async function getCategory(category, preview) {
+
+  const entry = await fetchGraphQL(
+    `query {
+      tagCollection(where: { slug: "${category}" }, limit: 1) {
+        items {
+          slug
+          name
+        }
+      }
+    }`,
+    preview
+  )
+
+  return extractCategory(entry);
 }

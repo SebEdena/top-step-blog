@@ -1,4 +1,4 @@
-import { getAllPostsWithSlug } from '../../lib/api'
+import { getAllPostsWithSlug, getCategories } from '../../lib/api'
 
 export default async function handler(req, res) {
     // Check for secret to confirm this is a valid request
@@ -8,8 +8,12 @@ export default async function handler(req, res) {
   
     try {
         const posts = await getAllPostsWithSlug();
+        const categories = await getCategories();
         await Promise.all(
             posts.map(post => res.unstable_revalidate(`/posts/${post.slug}`))
+        )
+        await Promise.all(
+            categories.map(category => res.unstable_revalidate(`/category/${category.slug}`))
         )
         await res.unstable_revalidate(`/`)
         return res.json({ revalidated: true })

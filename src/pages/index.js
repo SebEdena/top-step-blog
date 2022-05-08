@@ -5,18 +5,16 @@ import Layout from '../components/layout'
 import Intro from '../components/intro'
 import { getAllPostsForHome } from '../lib/api'
 import Head from 'next/head'
+import PageMeta from '../components/meta/page-meta'
 
 export default function Index({ preview, allPosts }) {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
   return (
     <>
+      <PageMeta url="/" />
       <Layout preview={preview}>
-        <Head>
-          <title>Next.js Blog Example</title>
-        </Head>
         <Container>
-          <Intro />
           {heroPost && (
             <HeroPost
               title={heroPost.title}

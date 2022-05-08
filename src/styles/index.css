@@ -3,3 +3,13 @@
 @tailwind components;
 /* purgecss end ignore */
 @tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    a {
+        @apply decoration-2
+    }
+}
