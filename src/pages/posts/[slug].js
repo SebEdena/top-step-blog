@@ -25,7 +25,7 @@ export default function Post({ post, morePosts, preview }) {
         post
         url={`/posts/${post.slug}`}
         title={post.title}
-        description={post.description}
+        description={post.excerpt}
         author={post.author.name}
         date={post.date}
         image={post.coverImage.url}

@@ -53,7 +53,7 @@ export default function PageMeta({
   post = false
 }) {
 
-  const computedTitle = title ? [title, defaultTitle].join(' | ') : defaultTitle;
+  const computedTitle = title ? title : defaultTitle;
   const computedDescription = description ? description : defaultDescription;
   const computedImageSrc = image ? image : baseUrl + defaultImage;
   const computedUrl = baseUrl + url;
