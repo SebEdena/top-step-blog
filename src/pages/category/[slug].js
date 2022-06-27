@@ -33,6 +33,9 @@ export default function Post({ posts, category, preview }) {
                 </title>
               </Head>
               <div>
+                <h2 className="mb-8 text-3xl md:text-5xl font-bold tracking-tighter leading-tight">
+                  Articles de {category.name}
+                </h2>
                 {
                   posts.map((post) => (
                     <PostPreview
@@ -40,9 +43,8 @@ export default function Post({ posts, category, preview }) {
                       title={post.title}
                       coverImage={post.coverImage}
                       date={post.date}
-                      author={post.author}
                       slug={post.slug}
-                      excerpt={post.excerpt}
+                      tags={post.tags}
                     />
                   ))
                 }

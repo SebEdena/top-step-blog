@@ -1,31 +1,38 @@
 import Link from 'next/link'
-import Avatar from '../components/avatar'
 import DateComponent from '../components/date'
-import CoverImage from './cover-image'
+import ContentfulImage from './contentful-image'
+import Tag from './tag'
 
 export default function PostPreview({
   title,
   coverImage,
   date,
-  excerpt,
-  author,
   slug,
+  tags
 }) {
   return (
-    <div>
-      <div className="mb-5">
-        <CoverImage title={title} slug={slug} url={coverImage.url} />
+    <div className="grid grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 mb-3 shadow-md bg-white rounded-md text-xs h-32">
+      <div>
+        <ContentfulImage 
+          className='rounded-l-md' 
+          height={500}
+          layout="fill"
+          title={title}
+          slug={slug}
+          src={coverImage.url}
+        />
       </div>
-      <h3 className="text-3xl mb-3 leading-snug">
-        <Link href={`/posts/${slug}`}>
-          <a className="hover:underline">{title}</a>
-        </Link>
-      </h3>
-      <div className="text-lg mb-4">
-        <DateComponent dateString={date} />
+      <div className='p-3 md:p-5 col-span-2 lg:col-span-3 2xl:col-span-4 flex flex-col gap-2'>
+        <h3 className="mb-2 flex-grow leading-snug text-sm md:text-md">
+          <Link href={`/posts/${slug}`}>
+            <a className="hover:underline">{title}</a>
+          </Link>
+        </h3>
+        <div className="flex flex-row justify-between">
+          <Tag tag={tags[0]} />
+          <DateComponent dateString={date} />
+        </div>
       </div>
-      <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-      {author && <Avatar name={author.name} picture={author.picture} />}
     </div>
   )
 }

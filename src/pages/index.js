@@ -2,9 +2,7 @@ import Container from '../components/container'
 import MoreStories from '../components/more-stories'
 import HeroPost from '../components/hero-post'
 import Layout from '../components/layout'
-import Intro from '../components/intro'
 import { getAllPostsForHome } from '../lib/api'
-import Head from 'next/head'
 import PageMeta from '../components/meta/page-meta'
 
 export default function Index({ preview, allPosts }) {
@@ -23,6 +21,7 @@ export default function Index({ preview, allPosts }) {
               author={heroPost.author}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
+              tags={heroPost.tags}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}

@@ -1,4 +1,4 @@
-const POST_GRAPHQL_FIELDS = `
+const POST_QUERY = `
 slug
 title
 coverImage {
@@ -12,6 +12,12 @@ author {
   }
 }
 excerpt
+tagsCollection {
+  items {
+    slug
+    name
+  }
+}
 content {
   json
   links {
@@ -41,6 +47,29 @@ content {
 }
 `
 
+const POSTS_QUERY = `
+slug
+title
+coverImage {
+  url
+}
+date
+author {
+  name
+  picture {
+    url
+  }
+}
+excerpt
+tagsCollection {
+  items {
+    slug
+    name
+  }
+}
+`
+
+
 async function fetchGraphQL(query, preview = false) {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`,
@@ -60,16 +89,24 @@ async function fetchGraphQL(query, preview = false) {
     .catch((err) => console.log(err))
 }
 
+function parsePost(post) {
+  post.tags = post.tagsCollection?.items?.map((tag) => ({ name: tag.name, slug: tag.slug }));
+  delete post.tagsCollection;
+  return post;
+}
+
 function extractPost(fetchResponse) {
-  return fetchResponse?.data?.postCollection?.items?.[0]
+  const post = fetchResponse?.data?.postCollection?.items?.[0];
+  return parsePost(post);
 }
 
 function extractPostEntries(fetchResponse) {
-  return fetchResponse?.data?.postCollection?.items
+  const posts = fetchResponse?.data?.postCollection?.items ?? [];
+  return posts.map(post => parsePost(post))
 }
 
 function extractCategories(fetchResponse) {
-  return fetchResponse?.data?.tagCollection?.items
+  return fetchResponse?.data?.tagCollection?.items ?? []
 }
 
 function extractCategory(fetchResponse) {
@@ -77,7 +114,8 @@ function extractCategory(fetchResponse) {
 }
 
 function extractPostsFromCategoryEntries(fetchResponse) {
-  return fetchResponse?.data?.tagCollection?.items?.[0]?.linkedFrom?.postCollection?.items
+  const posts = fetchResponse?.data?.tagCollection?.items?.[0]?.linkedFrom?.postCollection?.items ?? [];
+  return posts.map(post => parsePost(post));
 }
 
 export async function getPreviewPostBySlug(slug) {
@@ -85,7 +123,7 @@ export async function getPreviewPostBySlug(slug) {
     `query {
       postCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${POST_QUERY}
         }
       }
     }`,
@@ -99,7 +137,7 @@ export async function getAllPostsWithSlug() {
     `query {
       postCollection(where: { slug_exists: true }, order: date_DESC) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${POSTS_QUERY}
         }
       }
     }`
@@ -110,9 +148,9 @@ export async function getAllPostsWithSlug() {
 export async function getAllPostsForHome(preview) {
   const entries = await fetchGraphQL(
     `query {
-      postCollection(order: date_DESC, preview: ${preview ? 'true' : 'false'}) {
+      postCollection(order: date_DESC, limit: 11, preview: ${preview ? 'true' : 'false'}) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${POSTS_QUERY}
         }
       }
     }`,
@@ -128,7 +166,7 @@ export async function getPostAndMorePosts(slug, preview) {
       preview ? 'true' : 'false'
     }, limit: 1) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${POST_QUERY}
         }
       }
     }`,
@@ -140,7 +178,7 @@ export async function getPostAndMorePosts(slug, preview) {
       preview ? 'true' : 'false'
     }, limit: 2) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${POSTS_QUERY}
         }
       }
     }`,
@@ -161,7 +199,7 @@ export async function getAllPostsFromCategory(category, preview) {
           linkedFrom {
             postCollection(preview: ${preview ? 'true' : 'false'}) {
               items {
-                ${POST_GRAPHQL_FIELDS}
+                ${POSTS_QUERY}
               }
             }
           }
@@ -171,7 +209,8 @@ export async function getAllPostsFromCategory(category, preview) {
     preview
   )
 
-  return extractPostsFromCategoryEntries(entries);
+  return extractPostsFromCategoryEntries(entries)
+    .sort((post1, post2) => Date.parse(post2.date) - Date.parse(post1.date));
 }
 
 export async function getCategories() {

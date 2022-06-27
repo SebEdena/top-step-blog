@@ -7,7 +7,7 @@ export default function RichTextAsset({ id, assets }) {
   if (asset?.url) {
     return (
       <div className={markdownStyles['rich-text-image']}>
-        <ContentfulImage src={asset.url} layout="fill" alt={asset.description}/>
+        <ContentfulImage src={asset.url} alt={asset.description}/>
       </div>
     )
   }
