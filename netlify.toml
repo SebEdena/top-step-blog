@@ -1,3 +1,9 @@
 [build]
   publish = "dist"
   command = "npm run build"
+
+[[redirects]]
+  from = "https://regal-biscochitos-9d0adb.netlify.app/*"
+  to = "https://top-step.fr/"
+  status = 301
+  force = true
