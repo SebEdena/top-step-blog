@@ -66,7 +66,8 @@ export async function getStaticProps({ params, preview = false }) {
       preview,
       category,
       posts: posts ?? null,
-    }
+    },
+    revalidate: 60
   }
 }
 
