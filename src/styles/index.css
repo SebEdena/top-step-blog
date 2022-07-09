@@ -8,8 +8,4 @@
     html {
         font-family: 'Open Sans', sans-serif;
     }
-
-    a {
-        @apply decoration-2
-    }
 }

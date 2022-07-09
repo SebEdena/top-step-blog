@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -10,6 +11,25 @@ import { getAllPostsFromCategory, getCategories, getCategory } from '../../lib/a
 
 export default function Post({ posts, category, preview }) {
   const router = useRouter()
+
+  const postIncrement = 20;
+
+  const [visiblePosts, addMorePosts] = useState(postIncrement);
+
+  const getVisiblePosts = () => {
+    return posts
+      .slice(0, visiblePosts)
+      .map((post) => (
+        <PostPreview
+          key={post.slug}
+          title={post.title}
+          coverImage={post.coverImage}
+          date={post.date}
+          slug={post.slug}
+          tags={post.tags}
+        />
+      ))
+  }
 
   if (!router.isFallback && !posts) {
     return <ErrorPage statusCode={404} />
@@ -36,19 +56,20 @@ export default function Post({ posts, category, preview }) {
                 <h2 className="mb-8 text-3xl md:text-5xl font-bold tracking-tighter leading-tight">
                   Articles de {category.name}
                 </h2>
-                {
-                  posts.map((post) => (
-                    <PostPreview
-                      key={post.slug}
-                      title={post.title}
-                      coverImage={post.coverImage}
-                      date={post.date}
-                      slug={post.slug}
-                      tags={post.tags}
-                    />
-                  ))
-                }
+                {getVisiblePosts()}
               </div>
+              { 
+                visiblePosts < posts.length ?
+                <div className="mt-6 flex justify-center items-center">
+                  <button 
+                    className="rounded-md px-4 py-2 text-white bg-primary hover:bg-primary/80"
+                    onClick={() => addMorePosts(visiblePosts + postIncrement)}>
+                    Plus d'articles
+                  </button>
+                </div>
+                :
+                null
+              }
             </>
           )}
         </Container>
