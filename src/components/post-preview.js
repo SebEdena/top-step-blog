@@ -20,6 +20,7 @@ export default function PostPreview({
             title={title}
             slug={slug}
             src={coverImage.url}
+            sizes="30vw"
           />
         </a>
       </Link>
