@@ -18,6 +18,7 @@ export default function PostPreview({
             className='rounded-l-md cursor-pointer' 
             layout="fill"
             title={title}
+            alt={title}
             slug={slug}
             src={coverImage.url}
             sizes="30vw"

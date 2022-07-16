@@ -10,7 +10,11 @@ const ContentfulImage = (props) => {
       <Image 
         loader={contentfulLoader} 
         objectFit="cover" 
-        layout="responsive" 
+        layout="responsive"
+        placeholder='blur'
+        blurDataURL={
+          contentfulLoader({src: props.src, width: 10, quality: 20})
+        }
         {...props}
       />
     </div>
