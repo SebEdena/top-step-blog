@@ -1,5 +1,6 @@
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Readable } from "stream";
+import { getAllPostsWithSlug, getCategories } from '../../lib/api'
 
 const sitemap = async (req, res) => {
     const categories = await getCategories();
@@ -12,7 +13,7 @@ const sitemap = async (req, res) => {
     ]
 
     // Create a stream to write to
-    const stream = new SitemapStream({ hostname: `https://${req.headers.host}` });
+    const stream = new SitemapStream({ hostname: process.env.NEXT_PUBLIC_BASE_URL });
   
     res.writeHead(200, {
       "Content-Type": "application/xml",
