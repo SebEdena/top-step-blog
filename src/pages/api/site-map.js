@@ -6,10 +6,10 @@ const sitemap = async (req, res) => {
     const categories = await getCategories();
     const posts = await getAllPostsWithSlug();
 
-    links = [
-        { url: "/", changefreq: "weekly", priority: 1.5 },
-        ...categories.map(category => ({ url: `/category/${category.slug}`, changefreq: "weekly", priority: 1.25 })),
-        ...posts.map(post => ({ url: `/posts/${post.slug}`, changefreq: "hourly", priority: 1 }))
+    const links = [
+        { url: "/", changefreq: "weekly", priority: 1 },
+        ...categories.map(category => ({ url: `/category/${category.slug}`, changefreq: "weekly", priority: 0.75 })),
+        ...posts.map(post => ({ url: `/posts/${post.slug}`, changefreq: "hourly", priority: 0.5 }))
     ]
 
     // Create a stream to write to
