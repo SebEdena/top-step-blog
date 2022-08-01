@@ -26,6 +26,7 @@
     "@types/react": "^17.0.2",
     "autoprefixer": "10.4.2",
     "contentful-import": "^8.2.29",
+    "contentful-migration": "^4.9.4",
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.4",
     "eslint-config-prettier": "^8.5.0",

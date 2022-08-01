@@ -18,9 +18,11 @@ const renderEntry = (node, entryList) => {
   if(embed) {
     switch(embed.__typename) {
       case "SocialMedia": {
-        switch(embed.origin) {
-          case "twitter": return <Twitter link={embed.link} />;
-          case "youtube": return <Youtube link={embed.link} />;
+        const url = new URL(embed.link);
+        switch(url.hostname) {
+          case "youtu.be": 
+          case "www.youtube.com": return <Youtube link={embed.link} />;
+          case "twitter.com": return <Twitter link={embed.link} />;
           default: return null;
         }
       }
