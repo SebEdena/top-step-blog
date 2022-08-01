@@ -1,23 +1,21 @@
-import Image from 'next/image'
+import Image from 'next/future/image'
 
 const contentfulLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
+  return `${src}?fm=webp&w=${width}&q=${quality || 75}`
 }
 
 const ContentfulImage = (props) => {
   return (
-    <div className='relative h-full w-full'>
-      <Image 
-        loader={contentfulLoader} 
-        objectFit="cover" 
-        layout="responsive"
-        placeholder='blur'
-        blurDataURL={
-          contentfulLoader({src: props.src, width: 10, quality: 20})
-        }
-        {...props}
-      />
-    </div>
+    <Image 
+      loader={contentfulLoader}
+      layout="responsive"
+      placeholder='blur'
+      blurDataURL={
+        contentfulLoader({src: props.src, width: 10, quality: 20})
+      }
+      alt={props.alt ?? ''}
+      {...props}
+    />
   )
 }
 

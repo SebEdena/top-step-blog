@@ -1,3 +1,8 @@
 module.exports = {
-  distDir: 'dist',
+  distDir: 'dist',  
+  experimental: {
+    images: {
+      allowFutureImage: true,
+    },
+  },
 }

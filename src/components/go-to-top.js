@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import ContentfulImage from './contentful-image'
 import cn from 'classnames'
 
 export default function GoToTop() {

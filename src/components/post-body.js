@@ -1,36 +1,41 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import markdownStyles from '../styles/markdown-styles.module.css'
 import RichTextAsset from './rich-text-asset'
 import Youtube from './social-media/youtube'
 import Twitter from './social-media/twitter'
 
-const customMarkdownOptions = (content) => ({
-  renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node) => (
-      <RichTextAsset
-        id={node.data.target.sys.id}
-        assets={content.links.assets.block}
-      />
-    ),
-    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
-      const embedId = node.data.target.sys.id;
-      const embed = content.links.entries.block.find(entry => entry.sys.id === embedId)
-      if(embed) {
-        switch(embed.__typename) {
-          case "SocialMedia": {
-            switch(embed.origin) {
-              case "twitter": return <Twitter link={embed.link} />;
-              case "youtube": return <Youtube link={embed.link} />;
-              default: return null;
-            }
-          }
+const renderAsset = (node, content) => (
+  <RichTextAsset
+    id={node.data.target.sys.id}
+    assets={content.links.assets.block}
+  />
+)
+
+const renderEntry = (node, entryList) => {
+  const embedId = node.data.target.sys.id;
+  const embed = entryList.find(entry => entry.sys.id === embedId)
+  if(embed) {
+    switch(embed.__typename) {
+      case "SocialMedia": {
+        switch(embed.origin) {
+          case "twitter": return <Twitter link={embed.link} />;
+          case "youtube": return <Youtube link={embed.link} />;
+          default: return null;
         }
-        return null;
-      } else {
-        return null;
       }
     }
+    return null;
+  } else {
+    return null;
+  }
+}
+
+const customMarkdownOptions = (content) => ({
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: (node) => renderAsset(node, content),
+    [INLINES.EMBEDDED_ENTRY]: (node) => renderEntry(node, content.links.entries.inline),
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => renderEntry(node, content.links.entries.block)
   },
 })
 
