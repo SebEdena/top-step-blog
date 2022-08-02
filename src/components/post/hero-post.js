@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import Avatar from '../components/avatar'
-import Tag from '../components/tag'
-import DateComponent from '../components/date'
-import CoverImage from '../components/cover-image'
+import Tag from '../common/tag'
+import DateComponent from '../common/date'
+import CoverImage from '../image/cover-image'
 
 export default function HeroPost({
   title,
@@ -13,7 +12,7 @@ export default function HeroPost({
 }) {
   return (
     <section className='shadow-lg'>
-      <div className='relative'>
+      <article className='relative'>
         <CoverImage imgClasses="rounded-md" title={title} slug={slug} url={coverImage.url} />
         <div className="bottom-0 absolute w-full">
           <div className="gradient h-6 md:h-16 from-black/80 to-black/0 bg-gradient-to-t"></div>
@@ -29,7 +28,7 @@ export default function HeroPost({
             </div>
           </div>
         </div>
-      </div>
+      </article>
     </section>
   )
 }

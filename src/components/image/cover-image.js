@@ -13,6 +13,7 @@ export default function CoverImage({ imgClasses = '', title, url, slug }) {
       })}
       src={url}
       sizes='75vw'
+      quality={100}
       priority
     />
   )

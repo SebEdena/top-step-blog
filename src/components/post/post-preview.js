@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import DateComponent from '../components/date'
-import ContentfulImage from './contentful-image'
-import Tag from './tag'
+import DateComponent from '../common/date'
+import ContentfulImage from '../image/contentful-image'
+import Tag from '../common/tag'
 
 export default function PostPreview({
   title,
@@ -11,7 +11,7 @@ export default function PostPreview({
   tags
 }) {
   return (
-    <div className="grid grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 mb-3 shadow-md bg-white rounded-md text-xs h-32">
+    <article className="grid grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 mb-3 shadow-md bg-white rounded-md text-xs h-32">
       <div>
         <Link href={`/posts/${slug}`} >
           <a aria-label={title}>
@@ -40,6 +40,6 @@ export default function PostPreview({
           <DateComponent dateString={date} />
         </div>
       </div>
-    </div>
+    </article>
   )
 }

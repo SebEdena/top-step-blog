@@ -2,11 +2,10 @@ import { useState } from 'react'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Container from '../../components/container'
-import Layout from '../../components/layout'
+import Layout from '../../components/structure/layout'
 import PageMeta from '../../components/meta/page-meta'
-import PostPreview from '../../components/post-preview'
-import PostTitle from '../../components/post-title'
+import PostPreview from '../../components/post/post-preview'
+import PostTitle from '../../components/post/post-title'
 import { getAllPostsFromCategory, getCategories, getCategory } from '../../lib/api'
 
 export default function Post({ posts, category, preview }) {
@@ -42,37 +41,35 @@ export default function Post({ posts, category, preview }) {
         title={category.name}
       />
       <Layout preview={preview}>
-        <Container>
-          {router.isFallback ? (
-            <PostTitle>Loading…</PostTitle>
-          ) : (
-            <>
-              <Head>
-                <title>
-                  {category.name + " | Top Step" ?? "Top Step"}
-                </title>
-              </Head>
-              <div>
-                <h2 className="mb-8 text-3xl md:text-5xl font-bold tracking-tighter leading-tight">
-                  Articles de {category.name}
-                </h2>
-                {getVisiblePosts()}
+        {router.isFallback ? (
+          <PostTitle>Loading…</PostTitle>
+        ) : (
+          <>
+            <Head>
+              <title>
+                {category.name + " | Top Step" ?? "Top Step"}
+              </title>
+            </Head>
+            <section>
+              <h2 className="mb-8 text-3xl md:text-5xl font-bold tracking-tighter leading-tight">
+                Articles de {category.name}
+              </h2>
+              {getVisiblePosts()}
+            </section>
+            { 
+              visiblePosts < posts.length ?
+              <div className="mt-6 flex justify-center items-center">
+                <button 
+                  className="rounded-md px-4 py-2 text-white bg-primary hover:bg-primary/80"
+                  onClick={() => addMorePosts(visiblePosts + postIncrement)}>
+                  Plus d'articles
+                </button>
               </div>
-              { 
-                visiblePosts < posts.length ?
-                <div className="mt-6 flex justify-center items-center">
-                  <button 
-                    className="rounded-md px-4 py-2 text-white bg-primary hover:bg-primary/80"
-                    onClick={() => addMorePosts(visiblePosts + postIncrement)}>
-                    Plus d'articles
-                  </button>
-                </div>
-                :
-                null
-              }
-            </>
-          )}
-        </Container>
+              :
+              null
+            }
+          </>
+        )}
       </Layout>
     </>
   )

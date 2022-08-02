@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import SiteMeta from '../components/meta/site-meta'
 
 export default class MyDocument extends Document {
   render() {

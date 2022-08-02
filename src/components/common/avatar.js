@@ -1,4 +1,4 @@
-import ContentfulImage from './contentful-image'
+import ContentfulImage from '../image/contentful-image'
 
 export default function Avatar({ name, picture }) {
   return (

@@ -16,7 +16,7 @@ export default function Header() {
   const [sideMenuOpened, triggerSideMenu] = useState(false);
 
   return (
-    <div>
+    <header>
       <nav className="w-full h-14 top-0 left-0 right-0 fixed shadow-md z-40 bg-primary">
         <div className='pl-4 pr-4 flex flex-row items-center justify-center h-full w-full'>
           <div className='flex justify-center items-center lg:hidden w-12 h-full m-auto'>
@@ -52,7 +52,7 @@ export default function Header() {
           <div className='w-12 lg:w-48'></div>
         </div>
       </nav>
-      <div className={cn(
+      <nav className={cn(
         'transition-transform ease-in-out duration-500 w-72 h-full fixed top-0 left-0 shadow-md bg-accent text-grey z-50',
         sideMenuOpened ? 'translate-x-0' : '-translate-x-72'
         )}>
@@ -79,7 +79,7 @@ export default function Header() {
             ))}
           </ul>
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
   )
 }

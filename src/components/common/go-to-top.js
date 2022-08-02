@@ -15,6 +15,9 @@ export default function GoToTop() {
 
   useEffect(() => {
     window.addEventListener('scroll', handleVisibleButton)
+    return () => {
+      window.removeEventListener('scroll', handleVisibleButton)
+    }
   }, [])
 
   return (

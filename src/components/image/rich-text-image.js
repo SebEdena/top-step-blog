@@ -1,6 +1,6 @@
 import ContentfulImage from './contentful-image'
 
-export default function RichTextAsset({ id, assets }) {
+export default function RichTextImage({ id, assets }) {
   const asset = assets?.find((asset) => asset.sys.id === id)
 
   if (asset?.url) {

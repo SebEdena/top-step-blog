@@ -1,7 +1,6 @@
-import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Layout from '../components/layout'
+import MoreStories from '../components/post/more-posts'
+import HeroPost from '../components/post/hero-post'
+import Layout from '../components/structure/layout'
 import { getAllPostsForHome } from '../lib/api'
 import PageMeta from '../components/meta/page-meta'
 
@@ -12,20 +11,18 @@ export default function Index({ preview, allPosts }) {
     <>
       <PageMeta url="/" />
       <Layout preview={preview}>
-        <Container>
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-              tags={heroPost.tags}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container>
+        {heroPost && (
+          <HeroPost
+            title={heroPost.title}
+            coverImage={heroPost.coverImage}
+            date={heroPost.date}
+            author={heroPost.author}
+            slug={heroPost.slug}
+            excerpt={heroPost.excerpt}
+            tags={heroPost.tags}
+          />
+        )}
+        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
       </Layout>
     </>
   )
