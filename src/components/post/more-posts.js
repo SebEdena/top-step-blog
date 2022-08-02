@@ -2,7 +2,7 @@ import PostPreview from './post-preview'
 
 export default function MoreStories({ posts }) {
   return (
-    <aside className='pt-8 md:pt-12'>
+    <section className='pt-8 md:pt-12'>
       <h2 className="mb-8 text-5xl md:text-6xl font-bold tracking-tighter leading-tight">
         Autres informations
       </h2>
@@ -18,6 +18,6 @@ export default function MoreStories({ posts }) {
           />
         ))}
       </div>
-    </aside>
+    </section>
   )
 }
