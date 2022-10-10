@@ -8,7 +8,7 @@ export default function CoverImage({ imgClasses = '', title, url, slug }) {
       width={1000}
       height={700}
       alt={title}
-      className={cn('shadow-small', imgClasses, {
+      className={cn('cover-image shadow-small', imgClasses, {
         'hover:shadow-medium transition-shadow duration-200': slug,
       })}
       src={url}

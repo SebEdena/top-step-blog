@@ -15,8 +15,8 @@ export default function PostPreview({
       <div>
         <Link href={`/posts/${slug}`} >
           <a aria-label={title}>
-            <ContentfulImage 
-              className='rounded-l-md cursor-pointer w-full h-full object-cover' 
+            <ContentfulImage
+              className='rounded-l-md cursor-pointer w-full h-full max-h-32 object-cover' 
               layout="responsive"
               width={500}
               height={400}

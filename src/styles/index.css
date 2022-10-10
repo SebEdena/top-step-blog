@@ -8,4 +8,8 @@
     html {
         font-family: 'Open Sans', sans-serif;
     }
+
+    .cover-image {
+        max-height: 60vh !important;
+    }
 }
